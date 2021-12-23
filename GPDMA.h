@@ -190,9 +190,9 @@ typedef struct
 
 
 void GPDMASet_Transfer(ChannelConfig_s LPC_CH,uint8_t EnableMode);
-void GPDMA_UART0_TX_SEND(uint8_t *Buf,uint16_t Size);
-void GPDMA_UART0_RX_Receive(uint8_t *Buf,uint16_t Size);
-void GPDMA_GET_ADC(uint16_t *Buf,uint16_t Size);
+void GPDMA_UART0_TX_SEND(Channels_e Channel,uint8_t *Buf,uint16_t Size);
+void GPDMA_UART0_RX_Receive(Channels_e Channel,uint8_t *Buf,uint16_t Size);
+void GPDMA_GET_ADC(Channels_e Channel,uint16_t *Buf,uint16_t Size);
 
 
 #endif

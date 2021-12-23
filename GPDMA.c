@@ -27,11 +27,11 @@ void GPDMASet_Transfer(ChannelConfig_s LPC_CH,uint8_t EnableMode)
 
 
 
-void GPDMA_UART0_TX_SEND(uint8_t *Buf,uint16_t Size)
+void GPDMA_UART0_TX_SEND(Channels_e Channel,uint8_t *Buf,uint16_t Size)
 {
 	
 	ChannelConfig_s UART_TX_DMA;
-	UART_TX_DMA.CHx=CH1;
+	UART_TX_DMA.CHx=Channel;
 	UART_TX_DMA.CHx_Config.CCXConfiqREG.TransferType=MTOP;
 	UART_TX_DMA.CHx_Config.CCXConfiqREG.SrcPeripheral=0;//SRC is memory so it is not considered	
 	UART_TX_DMA.CHx_Config.CCXConfiqREG.DestPeripheral=UART0TX;
@@ -56,10 +56,10 @@ void GPDMA_UART0_TX_SEND(uint8_t *Buf,uint16_t Size)
 
 
 
-void GPDMA_UART0_RX_Receive(uint8_t *Buf,uint16_t Size)
+void GPDMA_UART0_RX_Receive(Channels_e Channel,uint8_t *Buf,uint16_t Size)
 {
 	ChannelConfig_s UART_RX_DMA;
-	UART_RX_DMA.CHx=CH0;
+	UART_RX_DMA.CHx=Channel;
 	UART_RX_DMA.CHx_Config.CCXConfiqREG.TransferType=PTOM;
 	UART_RX_DMA.CHx_Config.CCXConfiqREG.SrcPeripheral=0;//SRC is memory so it is not considered	
 	UART_RX_DMA.CHx_Config.CCXConfiqREG.DestPeripheral=UART0TX;
@@ -87,10 +87,10 @@ Size should be as follows:
 enabled channels number *  
 */
 
-void GPDMA_GET_ADC(uint16_t *Buf,uint16_t Size)
+void GPDMA_GET_ADC(Channels_e Channel,uint16_t *Buf,uint16_t Size)
 {
 	ChannelConfig_s ADC_DMA;
-	ADC_DMA.CHx=CH2;
+	ADC_DMA.CHx=Channel;
 	ADC_DMA.CHx_Config.CCXConfiqREG.TransferType=PTOM;
 	ADC_DMA.CHx_Config.CCXConfiqREG.SrcPeripheral=ADC;//SRC is memory so it is not considered	
 	ADC_DMA.CHx_Config.CCXConfiqREG.DestPeripheral=0;

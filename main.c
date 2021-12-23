@@ -88,23 +88,17 @@ int main()
 		for( i=0; i<2000000;i++);
 		GPIO_PinWrite(1,26,0);
 		for( i=0; i<2000000;i++);
-	/*			
-		CCControl=((13)|(0<<12)|(0<<15)|(0<<18)|(0<<21)|(0<<26)|(1<<27)|(1<<31));
-		CCConfig =((0)|(9<<1)|(0<<6)|(2<<11)) ;		
-		LPC_GPDMA->DMACIntErrClr|=3;
-		LPC_GPDMA->DMACIntTCClear|=3;
-		LPC_GPDMACH0->DMACCSrcAddr=(uint32_t)&LPC_UART0->RBR;
-		LPC_GPDMACH0->DMACCDestAddr=(uint32_t)&buf1;
-		LPC_GPDMACH0->DMACCLLI=0;
-		LPC_GPDMACH0->DMACCControl=CCControl;
-		LPC_GPDMACH0->DMACCConfig=CCConfig;	
-		LPC_GPDMACH0->DMACCConfig|=1;
-		while(((LPC_GPDMACH0->DMACCConfig)&(17<<1))==1);
-		*/
+
+		/* 
+		//snippet for testing receive and transmit a buffer using a DMA functions
+		//connect Uart0_TX to Uart0_Rx externally
 		
-		//GPDMA_UART0_TX_Receive(buf1,13);
+		GPDMA_UART0_TX_SEND(CH1,TXBUF,12);
+		GPDMA_UART0_TX_Receive(CH0,buf1,13);
 		
-		GPDMA_GET_ADC(ADCBUF,6);		
+		 */
+		//snippet for Reading ADC samples from DMA and sending to UART0_TX with DMA
+		GPDMA_GET_ADC(CH2,ADCBUF,6);		
 
 		for( i=0; i<6;i++)
 		{
@@ -112,22 +106,8 @@ int main()
 			TXBUF[2*i+1]=ADCBUF[i]/256;
 		}
 		 
-		GPDMA_UART0_TX_SEND(TXBUF,12);
-	/*	
- CCControl=((13)|(0<<12)|(0<<15)|(0<<18)|(0<<21)|(1<<26)|(0<<27)|(1<<31));
- CCConfig =((0)|(0<<1)|(8<<6)|(1<<11)) ;
-		LPC_GPDMA->DMACConfig|=1;
-		LPC_GPDMA->DMACIntErrClr|=3;
-		LPC_GPDMA->DMACIntTCClear|=3;
-		LPC_GPDMACH1->DMACCSrcAddr=(uint32_t)&buf1;
-		LPC_GPDMACH1->DMACCDestAddr=0x4000C000;
-		LPC_GPDMACH1->DMACCLLI=0;
-		LPC_GPDMACH1->DMACCControl=CCControl;
-		LPC_GPDMACH1->DMACCConfig=CCConfig;	
-		LPC_GPDMACH1->DMACCConfig|=1;
-		while(((LPC_GPDMACH1->DMACCConfig)&(1<<17))==1);
+		GPDMA_UART0_TX_SEND(CH1,TXBUF,12);
 
-		*/ 
 		 		 
 		 
 	}
