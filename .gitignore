@@ -1,0 +1,11 @@
+# Remove unnecessary files from git repository 
+#Output files
+/Objects
+#listing and map files
+/Listings
+#debug config and project setting filesfile
+/DebugConfig
+DMA.uvguix.Javad
+DMA.uvguix.MJP
+JLinkLog.txt
+JLinkSettings.ini
